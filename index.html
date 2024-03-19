@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificador de Flores</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gradio/inputs/css/inputs.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gradio/outputs/css/outputs.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Clasificador de Flores</h1>
+        </header>
+        <!-- Aquí va el resto de la interfaz -->
+        <div id="my_interface"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@gradio/inputs/dist/gradio.inputs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@gradio/outputs/dist/gradio.outputs.min.js"></script>
+    <script>
+        // Código JavaScript para inicializar la interfaz Gradio
+        gr("#my_interface", "webcam", { "label": "Clasificar imagen" });
+    </script>
+</body>
+</html>
+
