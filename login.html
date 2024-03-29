@@ -6,79 +6,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="styles_Login.css"> <!-- Corregido el atributo href -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3"></script>
     <!-- Header -->
-    <header>
-        <h1>FLORA-NET</h1>
-        <div class="container_Head">
-            <!-- Logotipo -->
-            <div class="logo">
-                <img src="imagenes/logo.jpg" alt="Logo" class="logo">
-            </div>
-            <!-- Enlaces de navegación -->
-            <nav>
-                <a href="index.html" class="nav-link">Inicio</a>
-                <a href="#" class="nav-link">Acerca de</a>
-                <a href="#" class="nav-link">Contacto</a>
-                <a href="login.html" class="nav-link">Iniciar sesión</a>
-            </nav>
-        </div>
-    </header>
 </head>
 <body>
-    
-
-    <div class="container" id="container">
-        <div class="form-container sign-up-container">
-            <form action="#">
-                <h1>Crear cuenta</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>O usa tu correo electronico</span>
-                <input type="text" placeholder="Name" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <button>Iniciar sesión</button>
-            </form>
-	    </div>
-        <div class="form-container sign-in-container">
-            <form action="#">
-                <h1>Iniciar sesión</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>O usa tu correo electronico</span>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <a href="#">¿Olvidaste tu contraseña?</a>
-                <button>Iniciar sesión</button>
-            </form>
-        </div>
-        <div class="overlay-container">
-            <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <h1>¡Bienvenido de nuevo!</h1>
-                    <p>Para seguir conectado con nosotros, por favor utiliza tu informacion personal</p>
-                    <button class="ghost" id="signIn">Iniciar sesión</button>
-                </div>
-                <div class="overlay-panel overlay-right">
-                    <h1>¡Hola!</h1>
-                    <p>Introduce tus datos personales</p>
-                    <button class="ghost" id="signUp">Iniciar sesión</button>
+    <header>
+        
+            <!-- Logotipo 
+            <h1>FLORA-NET</h1>
+            <div class="logo">
+                <img src="imagenes/logo.jpg" alt="Logo" class="logo">
+            </div>-->
+            <!-- Enlaces de navegación -->
+        <nav>
+            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="inf.html" class="nav-link">Acerca de</a>
+            <a href="contacto.html" class="nav-link">Contacto</a>
+            <a href="login.html" class="nav-link">Iniciar sesión</a>
+        </nav>
+        
+    </header>
+    <section id="login-section">
+        <div class="container" id="container">
+            <div class="form-container sign-up-container">
+                <form action="#">
+                    <h1>Crear cuenta</h1>
+                    <div class="social-container">
+                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <span>O usa tu correo electronico</span>
+                    <input type="text" placeholder="Name" />
+                    <input type="email" placeholder="Email" />
+                    <input type="password" placeholder="Password" />
+                    <button>Iniciar sesión</button>
+                </form>
+            </div>
+            <div class="form-container sign-in-container">
+                <form action="#">
+                    <h1>Iniciar sesión</h1>
+                    <div class="social-container">
+                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <span>O usa tu correo electronico</span>
+                    <input type="email" placeholder="Email" />
+                    <input type="password" placeholder="Password" />
+                    <a href="#">¿Olvidaste tu contraseña?</a>
+                    <button>Iniciar sesión</button>
+                </form>
+            </div>
+            <!-- Esta parte es de información de login  -->
+            <div class="overlay-container">
+                <div class="overlay">
+                    <!-- informacion de registrarse -->
+                    <div class="overlay-panel overlay-left">
+                        <h1>¡Hola!</h1>
+                        <div class="logo">
+                            <img src="imagenes/logo.jpg" alt="Logo" class="logo">
+                        </div>
+                        <h1>Bienvenido a FLORA-NET</h1>
+                        <p></p>
+                        <button class="ghost" id="signIn">Iniciar sesión</button>
+                    </div>
+                    <!-- información de inicio de sesión  -->
+                    <div class="overlay-panel overlay-right">
+                        <h1>¡Hola!</h1>
+                        <div class="logo">
+                            <img src="imagenes/logo.jpg" alt="Logo" class="logo">
+                        </div>
+                        <h1>Bienvenido a FLORA-NET</h1>
+                        <p>Registrate y comienza </p>
+                        <button class="ghost" id="signUp">Registrate</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-<footer>
-	<p>
-		FLORA-NET 2024
-	</p>
-</footer> 
+    </section>
+    <footer>
+        <p>
+            FLORA-NET 2024
+        </p>
+    </footer> 
 </body>
 <script src="script.js"></script>
 </html>
