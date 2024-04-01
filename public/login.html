@@ -1,0 +1,148 @@
+<!--login.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="styles_Login.css"> <!-- Corregido el atributo href -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3"></script>
+    <!-- Header -->
+</head>
+<body>
+    <header>
+        
+        <nav>
+            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="inf.html" class="nav-link">Acerca de</a>
+            <a href="contacto.html" class="nav-link">Contacto</a>
+            <a href="login.html" class="nav-link">Iniciar sesión</a>
+        </nav>
+        
+    </header>
+    <section id="login-section">
+        <div class="container" id="container">
+            <div class="form-container sign-up-container">
+                <form id="signUpForm">
+                    <h1>Crear cuenta</h1>
+                    <span>Usa tu correo electronico</span>
+                    <!--<input type="text" id="username" placeholder="Nombre de usuario" required />-->
+                    <input type="email" id="signupEmail" placeholder="Email" required />
+                    <input type="password" id="signupPassword" placeholder="Password" />
+                    <button type="submit">Crear cuenta</button>
+                </form>
+            </div>
+            <div class="form-container sign-in-container">
+                <form id="signInForm">
+                    <h1>Iniciar sesión</h1>
+                    <span>Usa tu correo electronico</span>
+                    <input type="email" id="loginEmail" placeholder="Correo electronico" required />
+                    <input type="password" id="loginPassword" placeholder="Password" required />
+                    <button type="submit">Iniciar sesión</button>
+                </form>
+            </div>
+            <!-- Esta parte es de información de login  -->
+            <div class="overlay-container">
+                <div class="overlay">
+                    <!-- informacion de registrarse -->
+                    <div class="overlay-panel overlay-left">
+                        <h1>¡Bienvenido!</h1>
+                        <div class="logo">
+                            <img src="imagenes/logo.jpg" alt="Logo" class="logo">
+                        </div>
+                        <h1>Unete a FLORA-NET</h1>
+                        <p></p>
+                        <button class="ghost" id="signIn">Iniciar sesión</button>
+                    </div>
+                    <!-- información de inicio de sesión  -->
+                    <div class="overlay-panel overlay-right">
+                        <h1>¡Bienvenido!</h1>
+                        <div class="logo">
+                            <img src="imagenes/logo.jpg" alt="Logo" class="logo">
+                        </div>
+                        <h1>Unete a FLORA-NET</h1>
+                        <p>Registrate y comienza </p>
+                        <button class="ghost" id="signUp">Registrate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>
+            FLORA-NET 2024
+        </p>
+    </footer> 
+
+    <script>
+        document.getElementById('signUpForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            //const username = document.getElementById('username').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+    
+            // Enviar datos al servidor
+            fetch('/guardar-datos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({email, password }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al enviar los datos al servidor');
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log(data);
+                alert('Datos guardados correctamente');
+            })
+            .catch(error => {
+                console.error(error);
+                alert('Error al guardar los datos');
+            });
+        });
+
+        document.getElementById('signInForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Leer el archivo de texto que contiene la información de usuario
+            fetch('../datos_usuarios.txt')
+            .then(response => response.text())
+            .then(data => {
+                // Dividir el contenido del archivo de texto en líneas
+                const lines = data.split('\n');
+
+                // Iterar sobre cada línea para verificar las credenciales
+                let found = false;
+                lines.forEach(line => {
+                    const [storedEmail, storedPassword] = line.split('|');
+                    if (storedEmail.trim() === email.trim() && storedPassword.trim() === password.trim()) {
+                        found = true;
+                        // Usuario autenticado
+                        alert('Inicio de sesión exitoso');
+                        // Aquí podrías redirigir al usuario a otra página
+                    }
+                });
+
+                if (!found) {
+                    // Usuario no encontrado o credenciales incorrectas
+                    alert('Credenciales incorrectas');
+                }
+            })
+            .catch(error => {
+                console.error('Error al leer el archivo:', error);
+                alert('Error al iniciar sesión');
+            });
+        });
+
+    </script>
+</body>
+
+<script src="scripts/script.js"></script>
+</html>

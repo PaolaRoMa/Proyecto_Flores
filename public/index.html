@@ -1,0 +1,46 @@
+<!--index.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificador de flores</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>FLORA-NET</h1>
+        <div class="container_Head">
+            <!-- Logotipo -->
+            <div class="logo">
+                <img src="imagenes/logo.jpg" alt="Logo" class="logo">
+            </div>
+            <!-- Enlaces de navegación -->
+            <nav>
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="inf.html" class="nav-link">Acerca de</a>
+                <a href="contacto.html" class="nav-link">Contacto</a>
+                <a href="login.html" class="nav-link">Iniciar sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="input-container">
+            <input type="file" id="fileInput" accept="image/*">
+            <label for="fileInput" class="btn">Seleccionar Imagen</label>
+        </div>
+        <div class="img-container">
+            <img id="imagen" src="" alt="">
+        </div>
+        <div class="button-container">
+            <button class="btn" onclick="predecirImagen()">Predecir</button>
+        </div>
+        <div id="resultado"></div>
+    </div>
+    
+</body>
+    <script src="scripts/script.js"></script>
+</html>
