@@ -1,6 +1,8 @@
+//server.js
 const express = require('express');
 const path = require('path');
-const fs = require('fs');
+const mysql = require('mysql');
+const morgan = require('morgan'); // Importa el middleware de registro morgan
 
 const app = express();
 const port = 3000;
@@ -11,60 +13,122 @@ app.use(express.urlencoded({ extended: true }));
 // Servir archivos estáticos desde la carpeta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Middleware de registro morgan
+app.use(morgan('dev')); // Registra las solicitudes HTTP en la consola
+
 // Ruta de manejo para la ruta raíz "/"
 app.get('/', (req, res) => {
     const indexPath = path.join(__dirname, 'public', 'index.html');
     res.sendFile(indexPath);
 });
 
-// Manejar solicitudes POST para guardar datos de usuario
-app.post('/guardar-datos', (req, res) => {
-    const {email, password } = req.body;
-    const userData = `${email}|${password}\n`;
-
-    const dataFilePath = path.join(__dirname,'datos_usuarios.txt');
-    fs.appendFile(dataFilePath, userData, (err) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Error al guardar los datos');
-        } else {
-            console.log('Datos guardados correctamente en el archivo.');
-            res.status(200).send('Datos guardados correctamente');
-        }
-    });
+// Configuración de la conexión a la base de datos
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'MiriamJal01@', // Reemplaza 'tu_contraseña' con la contraseña de tu base de datos
+    database: 'datos' // Reemplaza 'nombre_de_tu_base_de_datos' con el nombre de tu base de datos
 });
 
-// Ruta para manejar la solicitud POST de inicio de sesión
-app.post('/iniciar-sesion', (req, res) => {
-    const { email, password } = req.body;
-    const dataFilePath = '../datos_usuarios.txt';
+// Conectar a la base de datos
+db.connect((err) => {
+    if (err) {
+        throw err;
+    }
+    console.log('Conexión exitosa a la base de datos MySQL');
+});
 
-    // Leer el archivo de texto que contiene las credenciales
-    fs.readFile(dataFilePath, 'utf8', (err, data) => {
+app.post('/register', (req, res) => {
+
+    const {username, email, password } = req.body;
+
+    // Verificar si email y password están presentes y no son cadenas vacías
+    if ( !username||!email || !password) {
+        console.error('Email o contraseña vacíos.');
+        return res.status(400).send('Email y contraseña son obligatorios.');
+    }
+
+    const sql = 'INSERT INTO usuarios (username, email, password) VALUES (?, ?, ?)';
+    console.log('SQL:', sql); // Agregamos un registro para mostrar la consulta SQL
+    console.log('Datos:', [username, email, password]); // Agregamos un registro para mostrar los datos a insertar
+
+    db.query(sql, [username, email, password], (err, result) => {
         if (err) {
-            console.error('Error al leer el archivo de usuarios:', err);
+            console.error('Error al ejecutar la consulta de inserción:', err);
+            return res.status(500).send('Error interno del servidor');
+        }
+    
+        res.redirect('/index.html');
+        
+    });
+
+});
+
+const session = require('express-session');
+
+// Agregar middleware de sesiones
+app.use(session({
+    secret: 'secreto', // Clave secreta para firmar la cookie de sesión
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.get('/authenticated', (req, res) => {
+    if (req.session.username) {
+        res.status(200).send('authenticated');
+    } else {
+        res.status(401).send('not authenticated');
+    }
+});
+
+app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+
+    // Verificar las credenciales en la base de datos
+    const sql = 'SELECT * FROM usuarios WHERE email = ? AND password = ?';
+    db.query(sql, [email, password], (err, result) => {
+        if (err) {
+            console.error('Error al realizar la consulta:', err);
             res.status(500).send('Error interno del servidor');
             return;
         }
 
-        // Separar el contenido del archivo en líneas
-        const lines = data.split('\n');
+        // Si no se encuentra ningún usuario con las credenciales proporcionadas
+        if (result.length === 0) {
+            res.status(401).send('Credenciales incorrectas');
+        } else {
+            // Guardar el nombre de usuario en la sesión
+            req.session.username = result[0].username; // Aquí asignamos el nombre de usuario a req.session.username
 
-        // Buscar el usuario con las credenciales proporcionadas
-        let userFound = false;
-        lines.forEach(line => {
-            const [savedEmail, savedPassword] = line.split('|');
-            if (savedEmail === email && savedPassword === password) {
-                userFound = true;
-                res.send('Inicio de sesión exitoso');
-            }
-        });
-
-        // Si el usuario no se encuentra, enviar un mensaje de error
-        if (!userFound) {
-            res.status(401).send('Credenciales inválidas');
+            // Enviar una respuesta JSON con el nombre de usuario y cualquier otra información necesaria
+            res.status(200).json({ username: result[0].username });
         }
     });
+});
+
+
+
+// Agregar una ruta para cerrar sesión
+app.get('/logout', (req, res) => {
+    // Destruir la sesión para cerrar sesión
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('Error al cerrar sesión:', err);
+            res.status(500).send('Error interno del servidor');
+            return;
+        }
+        // Redirigir al usuario a la página de inicio después de cerrar sesión
+        res.redirect('/');
+    });
+});
+
+app.get('/username', (req, res) => {
+    // Verificar si el usuario está autenticado (si hay una sesión activa)
+    if (req.session.username) {
+        res.status(200).send(req.session.username); // Enviar el nombre de usuario si está autenticado
+    } else {
+        res.status(401).send('No hay sesión de usuario activa'); // Enviar un mensaje de error si no está autenticado
+    }
 });
 
 

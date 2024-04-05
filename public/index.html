@@ -15,6 +15,9 @@
         <div class="container_Head">
             <!-- Logotipo -->
             <div class="logo">
+                <div id="usernameDisplay">
+                    <p id="welcomeMessage">¡Bienvenido!</p>
+                </div>
                 <img src="imagenes/logo.jpg" alt="Logo" class="logo">
             </div>
             <!-- Enlaces de navegación -->
@@ -22,7 +25,8 @@
                 <a href="index.html" class="nav-link">Inicio</a>
                 <a href="inf.html" class="nav-link">Acerca de</a>
                 <a href="contacto.html" class="nav-link">Contacto</a>
-                <a href="login.html" class="nav-link">Iniciar sesión</a>
+                <a href="login.html" id="loginLink" class="nav-link">Iniciar sesión</a>
+                <a href="login.html" id="logoutLink" class="nav-link" style="display: none;">Cerrar sesión</a>
             </nav>
         </div>
     </header>
@@ -30,6 +34,7 @@
     <div class="container">
         <div class="input-container">
             <input type="file" id="fileInput" accept="image/*">
+            <p>Por favor selecciona una imagen de 180X180 pixeles.</p>
             <label for="fileInput" class="btn">Seleccionar Imagen</label>
         </div>
         <div class="img-container">
@@ -40,7 +45,33 @@
         </div>
         <div id="resultado"></div>
     </div>
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener referencias a los enlaces de inicio de sesión y cierre de sesión
+            const loginLink = document.getElementById('loginLink');
+            const logoutLink = document.getElementById('logoutLink');
+            const welcomeMessage = document.getElementById('welcomeMessage'); // Agregar referencia al mensaje de bienvenida
+
+            // Agregar un event listener al enlace de inicio de sesión
+            loginLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+                // Redireccionar a la página de inicio de sesión
+                window.location.href = 'login.html';
+            });
+
+            // Agregar un event listener al enlace de cierre de sesión
+            logoutLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+                // Ocultar el mensaje de bienvenida y el enlace de cierre de sesión
+                welcomeMessage.style.display = 'none';
+                logoutLink.style.display = 'none';
+
+                // Mostrar el enlace de inicio de sesión
+                loginLink.style.display = 'inline';
+            });
+        });
+
+    </script>
 </body>
     <script src="scripts/script.js"></script>
 </html>

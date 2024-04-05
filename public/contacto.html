@@ -15,13 +15,32 @@
     <!-- CSS -->
     <link rel="stylesheet" href="styles_Login.css">
 
-    <title>Layered Profile Card Hover Effect - Coding Torque</title>
+    <title>Card Hover</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+        .logo_color{
+            font-family: 'Montserrat', sans-serif;
+            color:white;
+        }
+        .primero{
+            font-family: 'Montserrat', sans-serif;
+            color:black;
+        }
+        #cont-section{
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
 </head>
 
 <body>
     <header>
         <div class="container_Head">
             <div class="logo">
+                <h1 class="logo_color"> FLORA-NET </h1>
+                <div id="usernameDisplay">
+                    <p id="welcomeMessage">¡Bienvenido!</p>
+                </div>
                 <img src="imagenes/logo.jpg" alt="Logo">
             </div>
             <nav>
@@ -33,26 +52,46 @@
         </div>
     </header>
     <section id="cont-section">
+        <h1 id="primero">Contactanos</h1>
         <div class="box">
             <div class="card">
                 <div class="imgBx">
-                    <img src="https://images.unsplash.com/photo-1532123675048-773bd75df1b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                    <img src="imagenes/avatar1.jpeg"
                         alt="images">
                 </div>
                 <div class="details">
-                    <h2>SomeOne Famous<br><span>Director</span></h2>
+                    <h2>Miriam Paola Rodriguez Martin<br><span>Programer</span></h2>
+                    <div class="social-buttons">
+                        <!-- Botones de redes sociales -->
+                        <a href="https://facebook.com" target="_blank"><img src="imagenes/fb.png" alt="Facebook"></a>
+                        <a href="https://wa.me/telefono" target="_blank"><img src="imagenes/whats.png" alt="WhatsApp"></a>
+                        <a href="https://instagram.com" target="_blank"><img src="imagenes/inta.png" alt="Instagram"></a>
+                        <a href="https://github.com" target="_blank"><img src="imagenes/github.png" alt="GitHub"></a>
+                        <a href="https://discord.com" target="_blank"><img src="imagenes/discord.png" alt="Discord"></a>
+                    </div>
                 </div>
             </div>
         
             <div class="card">
                 <div class="imgBx">
-                    <img src="https://images.unsplash.com/photo-1549417229-aa67d3263c09?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                    <img src="imagenes/avatar2.jpeg"
                         alt="images">
                 </div>
                 <div class="details">
-                    <h2>SomeOne Famous<br><span>Producer</span></h2>
+                    <h2>Maritza Medina Hernandez<br><span>Programer</span></h2>
+                    
+                    <div class="social-buttons">
+                        <!-- Botones de redes sociales -->
+                        <a href="https://facebook.com" target="_blank"><img src="imagenes/fb.png" alt="Facebook"></a>
+                        <a href="https://wa.me/telefono" target="_blank"><img src="imagenes/whats.png" alt="WhatsApp"></a>
+                        <a href="https://instagram.com" target="_blank"><img src="imagenes/inta.png" alt="Instagram"></a>
+                        <a href="https://github.com" target="_blank"><img src="imagenes/github.png" alt="GitHub"></a>
+                        <a href="https://discord.com" target="_blank"><img src="imagenes/discord.png" alt="Discord"></a>
+                    </div>
                 </div>
+ 
             </div>
+            
             
         </div>
     </section>
@@ -61,7 +100,33 @@
             FLORA-NET 2024
         </p>
     </footer> 
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener referencias a los enlaces de inicio de sesión y cierre de sesión
+            const loginLink = document.getElementById('loginLink');
+            const logoutLink = document.getElementById('logoutLink');
+            const welcomeMessage = document.getElementById('welcomeMessage'); // Agregar referencia al mensaje de bienvenida
+
+            // Agregar un event listener al enlace de inicio de sesión
+            loginLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+                // Redireccionar a la página de inicio de sesión
+                window.location.href = 'login.html';
+            });
+
+            // Agregar un event listener al enlace de cierre de sesión
+            logoutLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+                // Ocultar el mensaje de bienvenida y el enlace de cierre de sesión
+                welcomeMessage.style.display = 'none';
+                logoutLink.style.display = 'none';
+
+                // Mostrar el enlace de inicio de sesión
+                loginLink.style.display = 'inline';
+            });
+        });
+
+    </script>
 </body>
 
 </html>

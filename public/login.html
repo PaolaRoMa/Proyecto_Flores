@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="styles_Login.css"> <!-- Corregido el atributo href -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3"></script>
+    
+
     <!-- Header -->
 </head>
 <body>
@@ -16,24 +19,25 @@
             <a href="index.html" class="nav-link">Inicio</a>
             <a href="inf.html" class="nav-link">Acerca de</a>
             <a href="contacto.html" class="nav-link">Contacto</a>
-            <a href="login.html" class="nav-link">Iniciar sesión</a>
+            <!--<a href="login.html" id="loginLink" class="nav-link">Iniciar sesión</a>-->
+            <a href="login.html" id="logoutLink" class="nav-link" style="display: none;">Cerrar sesión</a>
         </nav>
         
     </header>
     <section id="login-section">
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form id="signUpForm">
+                <form id="signUpForm" action="/register" method="post">
                     <h1>Crear cuenta</h1>
-                    <span>Usa tu correo electronico</span>
-                    <!--<input type="text" id="username" placeholder="Nombre de usuario" required />-->
-                    <input type="email" id="signupEmail" placeholder="Email" required />
-                    <input type="password" id="signupPassword" placeholder="Password" />
+                    <span>Usa tu correo electrónico</span>
+                    <input type="text" id="signupUserName" name="username" placeholder="Nombre de usuario" required />
+                    <input type="email" id="signupEmail" name="email" placeholder="Email" required />
+                    <input type="password" id="signupPassword" name="password" placeholder="Password" required />
                     <button type="submit">Crear cuenta</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <form id="signInForm">
+                <form id="signInForm" action="/login" method="post">
                     <h1>Iniciar sesión</h1>
                     <span>Usa tu correo electronico</span>
                     <input type="email" id="loginEmail" placeholder="Correo electronico" required />
@@ -47,6 +51,7 @@
                     <!-- informacion de registrarse -->
                     <div class="overlay-panel overlay-left">
                         <h1>¡Bienvenido!</h1>
+                        <div id="usernameDisplay"></div>
                         <div class="logo">
                             <img src="imagenes/logo.jpg" alt="Logo" class="logo">
                         </div>
@@ -57,6 +62,7 @@
                     <!-- información de inicio de sesión  -->
                     <div class="overlay-panel overlay-right">
                         <h1>¡Bienvenido!</h1>
+                        <div id="usernameDisplay"></div>
                         <div class="logo">
                             <img src="imagenes/logo.jpg" alt="Logo" class="logo">
                         </div>
@@ -75,72 +81,66 @@
     </footer> 
 
     <script>
-        document.getElementById('signUpForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-    
-            //const username = document.getElementById('username').value;
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-    
-            // Enviar datos al servidor
-            fetch('/guardar-datos', {
+
+        document.getElementById('signInForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            fetch('/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({email, password }),
+                body: JSON.stringify({ email, password }), // Enviar email y contraseña en el cuerpo de la solicitud
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Error al enviar los datos al servidor');
+                    throw new Error('Error al iniciar sesión');
                 }
                 return response.text();
             })
             .then(data => {
-                console.log(data);
-                alert('Datos guardados correctamente');
+                // Redirigir al usuario a index.html
+                window.location.href = 'index.html';
+
+                // Mostrar el nombre de usuario en algún elemento HTML con el id "usernameDisplay"
+                document.getElementById('usernameDisplay').textContent = `¡Hola, ${data.username}!`;
             })
             .catch(error => {
-                console.error(error);
-                alert('Error al guardar los datos');
+                console.error(error); // Manejar errores
             });
         });
 
-        document.getElementById('signInForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener referencias a los enlaces de inicio de sesión y cierre de sesión
+            const loginLink = document.getElementById('loginLink');
+            const logoutLink = document.getElementById('logoutLink');
+            const welcomeMessage = document.getElementById('welcomeMessage'); // Agregar referencia al mensaje de bienvenida
 
-            // Leer el archivo de texto que contiene la información de usuario
-            fetch('../datos_usuarios.txt')
-            .then(response => response.text())
-            .then(data => {
-                // Dividir el contenido del archivo de texto en líneas
-                const lines = data.split('\n');
+            // Agregar un event listener al enlace de inicio de sesión
+            loginLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+                // Redireccionar a la página de inicio de sesión
+                window.location.href = 'login.html';
+            });
 
-                // Iterar sobre cada línea para verificar las credenciales
-                let found = false;
-                lines.forEach(line => {
-                    const [storedEmail, storedPassword] = line.split('|');
-                    if (storedEmail.trim() === email.trim() && storedPassword.trim() === password.trim()) {
-                        found = true;
-                        // Usuario autenticado
-                        alert('Inicio de sesión exitoso');
-                        // Aquí podrías redirigir al usuario a otra página
-                    }
-                });
+            // Agregar un event listener al enlace de cierre de sesión
+            logoutLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+                // Ocultar el mensaje de bienvenida y el enlace de cierre de sesión
+                welcomeMessage.style.display = 'none';
+                logoutLink.style.display = 'none';
 
-                if (!found) {
-                    // Usuario no encontrado o credenciales incorrectas
-                    alert('Credenciales incorrectas');
-                }
-            })
-            .catch(error => {
-                console.error('Error al leer el archivo:', error);
-                alert('Error al iniciar sesión');
+                // Mostrar el enlace de inicio de sesión
+                loginLink.style.display = 'inline';
             });
         });
 
+
+        
     </script>
 </body>
 

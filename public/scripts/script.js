@@ -56,6 +56,7 @@ async function predecirImagen() {
     }
 }
 
+
 document.addEventListener('DOMContentLoaded', function() {
     const signUpButton = document.getElementById('signUp');
     const signInButton = document.getElementById('signIn');
@@ -68,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
     signInButton.addEventListener('click', () => {
         container.classList.remove("right-panel-active");
     });
+
 });
 
 

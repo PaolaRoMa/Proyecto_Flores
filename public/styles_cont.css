@@ -200,3 +200,10 @@ footer a {
     color: #1598B3 ;
     text-decoration: none;
 }
+#parrafo {
+  text-align: center;
+}
+#parrafo p {
+  font-weight: bold;
+  margin-bottom: 30px; /* Ajusta este valor según el espacio que desees */
+}

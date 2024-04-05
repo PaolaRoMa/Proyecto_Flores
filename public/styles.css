@@ -23,6 +23,9 @@ h1 {
     margin-bottom: 20px;
     text-align: center;
 }
+p{
+    text-align: center;
+}
 
 .input-container {
     margin-bottom: 20px;

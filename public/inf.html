@@ -10,13 +10,40 @@
     <!-- CSS -->
     <link rel="stylesheet" href="styles_cont.css">
 
-    <title>Amazing Carousel using HTML CSS & JavaScript - Coding Torque</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+        /* Estilos para el contenedor principal */
+        .container_Inf {
+            font-family: 'Montserrat', sans-serif;
+            max-width: 800px; /* Ancho máximo del contenedor */
+            margin: 0 auto; /* Centrar el contenedor horizontalmente */
+            padding: 20px; /* Añadir relleno alrededor del contenido */
+        }
+
+        /* Estilos para el párrafo */
+        #parrafo {
+            font-family: 'Montserrat', sans-serif;
+            text-align: justify; /* Justificar el texto */
+            margin-top: 20px; /* Margen superior de 20px */
+            margin-bottom: 20px; /* Margen inferior de 20px */
+        }
+
+        .logo_color{
+            font-family: 'Montserrat', sans-serif;
+            color:white;
+        }
+    </style>
+
 </head>
 
 <body>
     <header>
         <div class="container_Head">
             <div class="logo">
+                <h1 class="logo_color"> FLORA-NET </h1>
+                <div id="usernameDisplay">
+                    <p id="welcomeMessage">¡Bienvenido!</p>
+                </div>
                 <img src="imagenes/logo.jpg" alt="Logo">
             </div>
             <nav>
@@ -27,47 +54,52 @@
             </nav>
         </div>
     </header>
-    
-</header>
-    <!-- Further code here -->
-   <h1>FLORA-NET</h1>
 
-    <div class="container">
-    <div class="card-carousel">
-        <div class="card" id="1">
-        <div class="image-container"></div>
-        <p>1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, explicabo!</p>
-        </div>
-        <div class="card" id="2">
-        <div class="image-container"></div>
-        <p>2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, explicabo!</p>
-        </div>
-        <div class="card" id="3">
-        <div class="image-container"></div>
-        <p>3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, explicabo!</p>
-        </div>  
-        <div class="card" id="4">
-        <div class="image-container"></div>
-        <p>4 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, explicabo!</p>
-        </div>
-        <div class="card" id="5">
-        <div class="image-container"></div>
-        <p>5 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, explicabo!</p>
-        </div>
-    </div>
-    <a href="#" class="visuallyhidden card-controller">Carousel controller</a>
-    <h1>ES una inteligencia artificial </h1>
-    <h1>ES una inteligencia artificial </h1>
-    </div>
-   
+        <div class="container_Inf">
+            <div id="parrafo">
+                <h1>Acerca de nosotros</h1>
+                <p>En Flora-Net, nos comprometemos a promover la sostenibilidad y la conservación ambiental. Creemos en la importancia de proteger la biodiversidad y en cultivar un mayor respeto por el mundo natural.Únete a nosotros en nuestro viaje para celebrar la belleza y la importancia de las plantas en nuestras vidas. ¡Bienvenido a Flora-Net, donde la naturaleza cobra vida!</p>
+                <h1>Nuestra Misión</h1>
+                <p>Nuestra misión es fomentar el amor y el cuidado por las plantas al proporcionar herramientas innovadoras y recursos educativos que inspiren a las personas a conectarse con la naturaleza de manera significativa.</p>
         
+                <p>La aplicación de la inteligencia artificial en la clasificación de flores no solo amplía nuestro conocimiento sobre la diversidad botánica, sino que también 
+                tiene importantes implicaciones prácticas en áreas como la conservación ambiental y la agricultura sostenible.</p>
+            </div>
+        </div>
+    </div>
    
     <footer>
         <p>
             FLORA-NET 2024
         </p>
     </footer> 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener referencias a los enlaces de inicio de sesión y cierre de sesión
+            const loginLink = document.getElementById('loginLink');
+            const logoutLink = document.getElementById('logoutLink');
+            const welcomeMessage = document.getElementById('welcomeMessage'); // Agregar referencia al mensaje de bienvenida
 
+            // Agregar un event listener al enlace de inicio de sesión
+            loginLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+                // Redireccionar a la página de inicio de sesión
+                window.location.href = 'login.html';
+            });
+
+            // Agregar un event listener al enlace de cierre de sesión
+            logoutLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+                // Ocultar el mensaje de bienvenida y el enlace de cierre de sesión
+                welcomeMessage.style.display = 'none';
+                logoutLink.style.display = 'none';
+
+                // Mostrar el enlace de inicio de sesión
+                loginLink.style.display = 'inline';
+            });
+        });
+
+    </script>
     <script src="scripts/Script1.js"></script>
 </body>
 
