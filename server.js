@@ -18,7 +18,7 @@ app.use(morgan('dev')); // Registra las solicitudes HTTP en la consola
 
 // Ruta de manejo para la ruta raíz "/"
 app.get('/', (req, res) => {
-    const indexPath = path.join(__dirname, 'public', 'index.html');
+    const indexPath = path.join(__dirname, 'public', 'login.html');
     res.sendFile(indexPath);
 });
 
@@ -58,28 +58,12 @@ app.post('/register', (req, res) => {
             return res.status(500).send('Error interno del servidor');
         }
     
-        res.redirect('/index.html');
+        res.redirect('/login.html');
         
     });
 
 });
 
-const session = require('express-session');
-
-// Agregar middleware de sesiones
-app.use(session({
-    secret: 'secreto', // Clave secreta para firmar la cookie de sesión
-    resave: false,
-    saveUninitialized: false
-}));
-
-app.get('/authenticated', (req, res) => {
-    if (req.session.username) {
-        res.status(200).send('authenticated');
-    } else {
-        res.status(401).send('not authenticated');
-    }
-});
 
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
@@ -106,30 +90,6 @@ app.post('/login', (req, res) => {
     });
 });
 
-
-
-// Agregar una ruta para cerrar sesión
-app.get('/logout', (req, res) => {
-    // Destruir la sesión para cerrar sesión
-    req.session.destroy((err) => {
-        if (err) {
-            console.error('Error al cerrar sesión:', err);
-            res.status(500).send('Error interno del servidor');
-            return;
-        }
-        // Redirigir al usuario a la página de inicio después de cerrar sesión
-        res.redirect('/');
-    });
-});
-
-app.get('/username', (req, res) => {
-    // Verificar si el usuario está autenticado (si hay una sesión activa)
-    if (req.session.username) {
-        res.status(200).send(req.session.username); // Enviar el nombre de usuario si está autenticado
-    } else {
-        res.status(401).send('No hay sesión de usuario activa'); // Enviar un mensaje de error si no está autenticado
-    }
-});
 
 
 app.listen(port, () => {

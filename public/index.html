@@ -1,4 +1,3 @@
-<!--index.html-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,64 +13,49 @@
         <h1>FLORA-NET</h1>
         <div class="container_Head">
             <!-- Logotipo -->
-            <div class="logo">
-                <div id="usernameDisplay">
-                    <p id="welcomeMessage">¡Bienvenido!</p>
-                </div>
+            <div class="logo"> 
+                
                 <img src="imagenes/logo.jpg" alt="Logo" class="logo">
             </div>
             <!-- Enlaces de navegación -->
             <nav>
-                <a href="index.html" class="nav-link">Inicio</a>
-                <a href="inf.html" class="nav-link">Acerca de</a>
-                <a href="contacto.html" class="nav-link">Contacto</a>
                 <a href="login.html" id="loginLink" class="nav-link">Iniciar sesión</a>
-                <a href="login.html" id="logoutLink" class="nav-link" style="display: none;">Cerrar sesión</a>
             </nav>
         </div>
     </header>
+        <h2>¡CONOCE FLORA-NET Y PRUEBA LA IA DE CLASIFICACION PARA FLORES!</h2>
+        <h3>Para comenzar, inicia sesion</h3>
 
-    <div class="container">
-        <div class="input-container">
-            <input type="file" id="fileInput" accept="image/*">
-            <p>Por favor selecciona una imagen de 180X180 pixeles.</p>
-            <label for="fileInput" class="btn">Seleccionar Imagen</label>
+        <div class="card">
+            <h2>Margarita</h2>
+            <img src="imagenes/Margarita.jpg" alt="Margarita" class="card-image">
+            <p>Esta flor se asocia con la belleza y la elegancia, y se cree que trae suerte y felicidad a aquellos que la tienen en su hogar.</p>
         </div>
-        <div class="img-container">
-            <img id="imagen" src="" alt="">
+        <div class="card">
+            <h2>Diente de león</h2>
+            <img src="imagenes/DienteDeLeon.jpg" alt="Imagen 1" class="card-image">
+            <p>Se simboliza para pedir un deseo al soplar una flor de diente de león</p>
         </div>
-        <div class="button-container">
-            <button class="btn" onclick="predecirImagen()">Predecir</button>
+        <div class="card">
+            <h2>Rosa</h2>
+            <img src="imagenes/Rosa.jpg" alt="Imagen 1" class="card-image">
+            <p>Usan para demostrar lo mucho que se ama a esa persona, comúnmente son las más las rojas, pero existen más colores.</p>
         </div>
-        <div id="resultado"></div>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Obtener referencias a los enlaces de inicio de sesión y cierre de sesión
-            const loginLink = document.getElementById('loginLink');
-            const logoutLink = document.getElementById('logoutLink');
-            const welcomeMessage = document.getElementById('welcomeMessage'); // Agregar referencia al mensaje de bienvenida
-
-            // Agregar un event listener al enlace de inicio de sesión
-            loginLink.addEventListener('click', function(event) {
-                event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
-                // Redireccionar a la página de inicio de sesión
-                window.location.href = 'login.html';
-            });
-
-            // Agregar un event listener al enlace de cierre de sesión
-            logoutLink.addEventListener('click', function(event) {
-                event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
-                // Ocultar el mensaje de bienvenida y el enlace de cierre de sesión
-                welcomeMessage.style.display = 'none';
-                logoutLink.style.display = 'none';
-
-                // Mostrar el enlace de inicio de sesión
-                loginLink.style.display = 'inline';
-            });
-        });
-
-    </script>
+        <div class="card">
+            <h2>Girasol</h2>
+            <img src="imagenes/Girasol.jpg" alt="Imagen 1" class="card-image">
+            <p>Significativa de demostrarle a alguien tu fidelidad y tu lealtad. Ese “siempre estaré ahí cuando más lo necesites”</p>
+        </div>
+        <div class="card">
+            <h2>Tulipán</h2>
+            <img src="imagenes/Tulipan.jpg" alt="Imagen 1" class="card-image">
+            <p>Son flores que simbolizan el enamoramiento, la pasión y el verdadero amor.</p>
+        </div>
+        <footer>
+            <p>
+                FLORA-NET 2024
+            </p>
+        </footer> 
 </body>
     <script src="scripts/script.js"></script>
 </html>

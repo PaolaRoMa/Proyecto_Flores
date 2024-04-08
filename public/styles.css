@@ -121,6 +121,76 @@ header {
     margin: 0 10px;
 }
 
+h2{
+    color: #1598B3;
+    margin-bottom: 20px;
+    text-align: center;
+}
+h3{
+    color: #043A52;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 
 /* Estilos para el header */
 
+.card {
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px;
+    width: 200px;
+    height: 300px;
+    float: left;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.card-content {
+    padding: 10px;
+}
+
+.card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 14px;
+}
+
+.card-image {
+    width: 100%; /* Ajusta la anchura de la imagen para que se ajuste al contenedor de la carta */
+    height: auto; /* Permite que la altura de la imagen se ajuste automáticamente */
+    display: block; /* Asegura que la imagen sea un bloque */
+    border-bottom: 1px solid #ccc; /* Añade un borde inferior a la imagen */
+}
+
+/*Pie de pagina */
+footer {
+    background-color: #222; /* Establece el color de fondo a un tono oscuro */
+	color: #fff; /* Establece el color del texto a blanco */
+	font-size: 14px; /* Establece el tamaño de fuente a 14 píxeles */
+	bottom: 0px; /* Posiciona el pie de página alineado con la parte inferior de la ventana gráfica */
+	position: fixed; /* Fija la posición del pie de página en relación con la ventana gráfica */
+	left: 0; /* Posiciona el pie de página alineado con el borde izquierdo de la ventana gráfica */
+	right: 0; /* Posiciona el pie de página alineado con el borde derecho de la ventana gráfica */
+	text-align: center; /* Alinea el contenido del pie de página al centro */
+	z-index: 999; /* Establece el orden de apilamiento del pie de página por encima de otros elementos */
+	margin-top: 20px; /* Agrega espacio entre el pie de página y la sección anterior */
+	padding: 0px; /* Agrega un poco de relleno interno al pie de página */
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+footer i {
+    color: #043A52 ;
+}
+
+footer a {
+    color: #1598B3 ;
+    text-decoration: none;
+}
