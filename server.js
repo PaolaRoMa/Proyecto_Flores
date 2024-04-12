@@ -30,6 +30,14 @@ const db = mysql.createConnection({
     database: 'datos' // Reemplaza 'nombre_de_tu_base_de_datos' con el nombre de tu base de datos
 });
 
+const session = require('express-session');
+
+app.use(session({
+    secret: 'secreto', // Clave secreta para firmar la cookie de sesión
+    resave: false,
+    saveUninitialized: false
+}));
+
 // Conectar a la base de datos
 db.connect((err) => {
     if (err) {
@@ -70,6 +78,7 @@ app.post('/login', (req, res) => {
 
     // Verificar las credenciales en la base de datos
     const sql = 'SELECT * FROM usuarios WHERE email = ? AND password = ?';
+
     db.query(sql, [email, password], (err, result) => {
         if (err) {
             console.error('Error al realizar la consulta:', err);

@@ -9,7 +9,7 @@ body {
 
 .container {
     max-width: 600px;
-    margin: 0 auto;
+    margin: 80px auto 150px;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -25,7 +25,7 @@ h1 {
 }
 p{
     text-align: center;
-}
+}   
 
 .input-container {
     margin-bottom: 20px;
@@ -76,6 +76,7 @@ p{
 
 #resultado {
     margin-top: 20px;
+    margin-bottom: 20px; /* Agrega espacio adicional debajo del resultado */
     padding: 10px;
     background-color: #f0f0f0;
     border-radius: 4px;
@@ -133,7 +134,15 @@ h3{
 }
 
 
-/* Estilos para el header */
+/* Estilos para las cartas */
+.container-cartas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Ajusta el espacio entre las cartas */
+    margin-top: 30px; 
+    margin-bottom: 80px; 
+
+}
 
 .card {
     align-items: center;
@@ -142,7 +151,7 @@ h3{
     padding: 20px;
     margin: 20px;
     width: 200px;
-    height: 300px;
+    height: 320px;
     float: left;
     background-color: #f9f9f9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -170,16 +179,16 @@ h3{
 /*Pie de pagina */
 footer {
     background-color: #222; /* Establece el color de fondo a un tono oscuro */
-	color: #fff; /* Establece el color del texto a blanco */
-	font-size: 14px; /* Establece el tamaño de fuente a 14 píxeles */
-	bottom: 0px; /* Posiciona el pie de página alineado con la parte inferior de la ventana gráfica */
-	position: fixed; /* Fija la posición del pie de página en relación con la ventana gráfica */
-	left: 0; /* Posiciona el pie de página alineado con el borde izquierdo de la ventana gráfica */
-	right: 0; /* Posiciona el pie de página alineado con el borde derecho de la ventana gráfica */
-	text-align: center; /* Alinea el contenido del pie de página al centro */
-	z-index: 999; /* Establece el orden de apilamiento del pie de página por encima de otros elementos */
-	margin-top: 20px; /* Agrega espacio entre el pie de página y la sección anterior */
-	padding: 0px; /* Agrega un poco de relleno interno al pie de página */
+    color: #fff; /* Establece el color del texto a blanco */
+    font-size: 14px; /* Establece el tamaño de fuente a 14 píxeles */
+    bottom: 0px; /* Posiciona el pie de página alineado con la parte inferior de la ventana gráfica */
+    position: fixed; /* Fija la posición del pie de página en relación con la ventana gráfica */
+    left: 0; /* Posiciona el pie de página alineado con el borde izquierdo de la ventana gráfica */
+    right: 0; /* Posiciona el pie de página alineado con el borde derecho de la ventana gráfica */
+    text-align: center; /* Alinea el contenido del pie de página al centro */
+    z-index: 999; /* Establece el orden de apilamiento del pie de página por encima de otros elementos */
+    margin-top: 500px; /* Agrega espacio entre el pie de página y la sección anterior */
+    padding: 5px 0; /* Agrega relleno arriba y abajo */
 }
 
 footer p {
@@ -193,4 +202,24 @@ footer i {
 footer a {
     color: #1598B3 ;
     text-decoration: none;
+}
+
+/* Presentacion mensajes*/
+.presentacion {
+    background-color: #e8f1f0; /* Color de fondo */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.presentacion h2 {
+    color: #043A52; /* Color del texto */
+    margin-bottom: 10px; /* Margen inferior */
+    text-align: center; /* Alineación del texto */
+}
+
+.presentacion h3 {
+    color: #1598B3; /* Color del texto */
+    margin-bottom: 20px; /* Margen inferior */
+    text-align: center; /* Alineación del texto */
 }
